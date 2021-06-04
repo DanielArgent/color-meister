@@ -434,17 +434,43 @@ document.addEventListener("DOMContentLoaded", () => {
     throw new Error("incorrect");
   }
 
-  function parseComponents([r, g, b]: string[]) {
+  function parseComponents([r, g, b]: string[]): Color.RGB {
     return new Color.RGB(parseComponent(r), parseComponent(g), parseComponent(b));
+  }
+
+  function parseLCHComponents([l, c, h]: string[]): Color.LCH {
+    return new Color.LCH(parseInt(l), parseInt(c), parseInt(h));
   }
 
   function setAsColor(selector: string, rgb: Color.RGB) {
     document.querySelector(selector).setAttribute("fill", `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`);
   }
 
+  const firstColorLCH = [
+    document.querySelector("#firstColorL") as HTMLInputElement,
+    document.querySelector("#firstColorC") as HTMLInputElement,
+    document.querySelector("#firstColorH") as HTMLInputElement,
+  ];
+
+  function writeLCH(lchInputs: HTMLInputElement[], lch: Color.LCH) {
+    lchInputs[0].value = lch.l.toFixed(0);
+    lchInputs[1].value = lch.c.toFixed(0);
+    lchInputs[2].value = lch.h.toFixed(0);
+  }
+
+  function writeRGB(inputs: HTMLInputElement[], rgb: Color.RGB) {
+    inputs[0].value = rgb.r.toFixed(0);
+    inputs[1].value = rgb.g.toFixed(0);
+    inputs[2].value = rgb.b.toFixed(0);
+  }
+
   function onInputChanged() {
     const rgb1 = parseComponents(firstColorInputs.map(i => i.value));
     const rgb2 = parseComponents(secondColorInputs.map(i => i.value));
+
+    const lch1 = rgb1.toLCH();
+
+    writeLCH(firstColorLCH, lch1);
 
     setAsColor("#firstColorBox", rgb1);
     setAsColor("#secondColorBox", rgb2);
@@ -456,7 +482,19 @@ document.addEventListener("DOMContentLoaded", () => {
     setAsColor("#resultColorBox", res);
   }
 
+  function onLCHInputChanged() {
+    const lch1 = parseLCHComponents(firstColorLCH.map(i => i.value));
+
+    const rgb1 = lch1.toRGB();
+
+    writeRGB(firstColorInputs, rgb1);
+
+    onInputChanged();
+  }
+
   [...firstColorInputs, ...secondColorInputs].map(i => i.addEventListener("input", onInputChanged));
 
   part.addEventListener("input", onInputChanged);
+
+  [...firstColorLCH].map(i => i.addEventListener("input", onLCHInputChanged))
 })

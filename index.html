@@ -23,6 +23,10 @@
         }
 
         .color-input {
+            margin-bottom: 15px;
+        }
+
+        .color-input-group {
             padding: 35px 50px 0 50px;
         }
 
@@ -44,10 +48,18 @@
     </section>
 
     <section class="presentation">
-        <div class="color-input">
-            <input class="color-input__input" type="text" id="firstColorR" value="255">
-            <input class="color-input__input" type="text" id="firstColorG" value="0">
-            <input class="color-input__input" type="text" id="firstColorB" value="0">
+        <div class="color-input-group">
+            <div class="color-input">
+                <input class="color-input__input" type="text" id="firstColorR" value="255">
+                <input class="color-input__input" type="text" id="firstColorG" value="0">
+                <input class="color-input__input" type="text" id="firstColorB" value="0">
+            </div>
+
+            <div class="color-input">
+                <input class="color-input__input" type="text" id="firstColorL" value="255">
+                <input class="color-input__input" type="text" id="firstColorC" value="0">
+                <input class="color-input__input" type="text" id="firstColorH" value="0">
+            </div>
         </div>
 
         <svg width="434" height="327" viewBox="0 0 434 327" fill="none">
@@ -58,10 +70,12 @@
             <rect width="100" height="100" rx="50" fill="#ff0000" id="firstColorBox"/>
         </svg>
 
-        <div class="color-input">
-            <input class="color-input__input" type="text" id="secondColorR" value="0">
-            <input class="color-input__input" type="text" id="secondColorG" value="255">
-            <input class="color-input__input" type="text" id="secondColorB" value="0">
+        <div class="color-input-group">
+            <div class="color-input">
+                <input class="color-input__input" type="text" id="secondColorR" value="0">
+                <input class="color-input__input" type="text" id="secondColorG" value="255">
+                <input class="color-input__input" type="text" id="secondColorB" value="0">
+            </div>
         </div>
     </section>
 

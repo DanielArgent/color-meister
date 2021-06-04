@@ -372,18 +372,46 @@ document.addEventListener("DOMContentLoaded", function () {
         var r = _a[0], g = _a[1], b = _a[2];
         return new Color.RGB(parseComponent(r), parseComponent(g), parseComponent(b));
     }
+    function parseLCHComponents(_a) {
+        var l = _a[0], c = _a[1], h = _a[2];
+        return new Color.LCH(parseInt(l), parseInt(c), parseInt(h));
+    }
     function setAsColor(selector, rgb) {
         document.querySelector(selector).setAttribute("fill", "rgb(" + rgb.r + ", " + rgb.g + ", " + rgb.b + ")");
+    }
+    var firstColorLCH = [
+        document.querySelector("#firstColorL"),
+        document.querySelector("#firstColorC"),
+        document.querySelector("#firstColorH"),
+    ];
+    function writeLCH(lchInputs, lch) {
+        lchInputs[0].value = lch.l.toFixed(0);
+        lchInputs[1].value = lch.c.toFixed(0);
+        lchInputs[2].value = lch.h.toFixed(0);
+    }
+    function writeRGB(inputs, rgb) {
+        inputs[0].value = rgb.r.toFixed(0);
+        inputs[1].value = rgb.g.toFixed(0);
+        inputs[2].value = rgb.b.toFixed(0);
     }
     function onInputChanged() {
         var rgb1 = parseComponents(firstColorInputs.map(function (i) { return i.value; }));
         var rgb2 = parseComponents(secondColorInputs.map(function (i) { return i.value; }));
+        var lch1 = rgb1.toLCH();
+        writeLCH(firstColorLCH, lch1);
         setAsColor("#firstColorBox", rgb1);
         setAsColor("#secondColorBox", rgb2);
         var partInt = parseInt(part.value) / 100;
         var res = Color.RGB.mix(rgb1, rgb2, 1 - partInt);
         setAsColor("#resultColorBox", res);
     }
+    function onLCHInputChanged() {
+        var lch1 = parseLCHComponents(firstColorLCH.map(function (i) { return i.value; }));
+        var rgb1 = lch1.toRGB();
+        writeRGB(firstColorInputs, rgb1);
+        onInputChanged();
+    }
     __spreadArrays(firstColorInputs, secondColorInputs).map(function (i) { return i.addEventListener("input", onInputChanged); });
     part.addEventListener("input", onInputChanged);
+    __spreadArrays(firstColorLCH).map(function (i) { return i.addEventListener("input", onLCHInputChanged); });
 });

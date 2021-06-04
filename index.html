@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: #121212;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fcfcfc;
+        }
+
+        .presentation {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .color-input {
+            padding: 35px 50px 0 50px;
+        }
+
+        .color-input__input {
+            width: 3ch;
+            background: #1A1A1A;
+            color: #fcfcfc;
+            border: 1px solid #545454;
+            padding: 7px 10px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="center">Color Mix</h1>
+
+    <section class="presentation">
+        <input type="range" id="part" max="100" min="0" step="1" value="50">
+    </section>
+
+    <section class="presentation">
+        <div class="color-input">
+            <input class="color-input__input" type="text" id="firstColorR" value="255">
+            <input class="color-input__input" type="text" id="firstColorG" value="0">
+            <input class="color-input__input" type="text" id="firstColorB" value="0">
+        </div>
+
+        <svg width="434" height="327" viewBox="0 0 434 327" fill="none">
+            <rect x="167" y="227" width="100" height="100" rx="50" fill="rgb(209, 169, 0)" id="resultColorBox"/>
+            <path d="M50.3029 99.6023C50.3029 99.6023 63.7763 129.553 96.5 141.5C128 153 215.085 182.764 217.303 226.602" stroke="#545454" stroke-width="3"/>
+            <path d="M384.526 99.5261C384.526 99.5261 371.052 129.477 338.329 141.424C306.829 152.924 219.744 182.687 217.526 226.526" stroke="#545454" stroke-width="3"/>
+            <rect x="334" width="100" height="100" rx="50" fill="#00ff00"  id="secondColorBox"/>
+            <rect width="100" height="100" rx="50" fill="#ff0000" id="firstColorBox"/>
+        </svg>
+
+        <div class="color-input">
+            <input class="color-input__input" type="text" id="secondColorR" value="0">
+            <input class="color-input__input" type="text" id="secondColorG" value="255">
+            <input class="color-input__input" type="text" id="secondColorB" value="0">
+        </div>
+    </section>
+
+    <script src="Matrix.js"></script>
+</body>
+</html>

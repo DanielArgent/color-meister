@@ -1,0 +1,5 @@
+type Shape = Shape m n
+
+type Vector = Vector values
+    let zip (fn: Function) (Vector values) (Vector values') = 
+        List.zip fn values values' |> Vector
